@@ -7,3 +7,10 @@ export interface IUser {
   token: string;
   refreshToken?: string;
 }
+
+export interface IUserRegisterRequest {
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
+}
