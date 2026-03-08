@@ -1,9 +1,15 @@
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { AppRoutes } from "./routes/AppRoutes";
+
 const App = () => {
   return (
-    <div className="text-center mt-10 text-2xl font-bold">
-      <h1>Welcome to the E-commerce UI</h1>
-      {/* Add your components and routes here */}
-    </div>
+    <BrowserRouter>
+      <Routes>
+        {AppRoutes.map((route) => (
+          <Route key={route.path} path={route.path} element={route.element} />
+        ))}
+      </Routes>
+    </BrowserRouter>
   );
 };
 
