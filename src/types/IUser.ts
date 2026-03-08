@@ -4,4 +4,6 @@ export interface IUser {
   lastName: string;
   email: string;
   isAdmin: boolean;
+  token: string;
+  refreshToken?: string;
 }
