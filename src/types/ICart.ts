@@ -11,3 +11,10 @@ export interface ICart {
   totalPrice: number;
   orderedOn: string;
 }
+
+export interface IUpdateCartRequest {
+  cartItems: {
+    productId: string;
+    quantity: number;
+  }[];
+}

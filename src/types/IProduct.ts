@@ -6,3 +6,9 @@ export interface IProduct {
   isActive: boolean;
   createdOn: string;
 }
+
+export interface ICreateProductRequest {
+  name: string;
+  description: string;
+  price: number;
+}
