@@ -1,4 +1,4 @@
-const ProductView = () => {
+const ProductViewPage = () => {
   return (
     <div>
       <h1>ProductView</h1>
@@ -6,4 +6,4 @@ const ProductView = () => {
   );
 };
 
-export default ProductView;
+export default ProductViewPage;

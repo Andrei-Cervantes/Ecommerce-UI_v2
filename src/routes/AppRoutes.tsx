@@ -1,15 +1,15 @@
-import AdminDashboard from "@/pages/Admin/AdminDashboard";
-import AdminOrders from "@/pages/Admin/AdminOrders";
+import AdminDashboard from "@/pages/Admin/AdminDashboardPage";
+import AdminOrders from "@/pages/Admin/AdminOrdersPage";
 
-import PrivateHomePage from "@/pages/Private/Home";
-import Orders from "@/pages/Private/Orders";
-import Products from "@/pages/Private/Products";
-import ProductView from "@/pages/Private/ProductView";
-import Profile from "@/pages/Private/Profile";
+import PrivateHomePage from "@/pages/Private/HomePage";
+import Orders from "@/pages/Private/OrdersPage";
+import Products from "@/pages/Private/ProductsPage";
+import ProductView from "@/pages/Private/ProductViewPage";
+import Profile from "@/pages/Private/ProfilePage";
 
-import PublicHomePage from "@/pages/Public/Home";
-import Login from "@/pages/Public/Login";
-import Register from "@/pages/Public/Register";
+import PublicHomePage from "@/pages/Public/HomePage";
+import Login from "@/pages/Public/LoginPage";
+import Register from "@/pages/Public/RegisterPage";
 
 import ProtectedRoute from "./ProtectedRoute";
 

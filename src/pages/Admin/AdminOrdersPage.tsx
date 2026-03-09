@@ -1,4 +1,4 @@
-const AdminOrders = () => {
+const AdminOrdersPage = () => {
   return (
     <div>
       <h1>AdminOrders</h1>
@@ -6,4 +6,4 @@ const AdminOrders = () => {
   );
 };
 
-export default AdminOrders;
+export default AdminOrdersPage;
