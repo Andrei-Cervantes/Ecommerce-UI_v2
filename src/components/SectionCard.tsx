@@ -13,7 +13,7 @@ const SectionCard: React.FC<SectionCardProps> = ({
 }) => {
   return (
     <Card className={`w-full p-6 ${className}`}>
-      {title && <h2 className="text-xl font-bold mb-4">{title}</h2>}
+      {title && <h2 className="text-xl font-bold mb-4 text-center">{title}</h2>}
       {children}
     </Card>
   );
