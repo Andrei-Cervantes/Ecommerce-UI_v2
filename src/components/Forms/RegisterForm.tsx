@@ -62,7 +62,6 @@ const RegisterForm = () => {
         </div>
         <div>
           <Input
-            autoFocus
             type="text"
             placeholder="Last Name"
             {...register("lastName")}
@@ -71,12 +70,7 @@ const RegisterForm = () => {
         </div>
       </div>
       <div>
-        <Input
-          autoFocus
-          type="email"
-          placeholder="Email"
-          {...register("email")}
-        />
+        <Input type="email" placeholder="Email" {...register("email")} />
         {errors.email && <ErrorText text={errors.email.message} />}
       </div>
       <div>
