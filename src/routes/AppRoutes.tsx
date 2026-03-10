@@ -26,7 +26,7 @@ export const AppRoutes = [
   {
     path: "/home",
     element: (
-      <ProtectedRoute>
+      <ProtectedRoute requiredRole="user">
         <PrivateHomePage />
       </ProtectedRoute>
     ),
@@ -34,7 +34,7 @@ export const AppRoutes = [
   {
     path: "/products",
     element: (
-      <ProtectedRoute>
+      <ProtectedRoute requiredRole="user">
         <Products />
       </ProtectedRoute>
     ),
@@ -42,7 +42,7 @@ export const AppRoutes = [
   {
     path: "/products/:id",
     element: (
-      <ProtectedRoute>
+      <ProtectedRoute requiredRole="user">
         <ProductView />
       </ProtectedRoute>
     ),
@@ -50,7 +50,7 @@ export const AppRoutes = [
   {
     path: "/profile",
     element: (
-      <ProtectedRoute>
+      <ProtectedRoute requiredRole="user">
         <Profile />
       </ProtectedRoute>
     ),
@@ -58,7 +58,7 @@ export const AppRoutes = [
   {
     path: "/orders",
     element: (
-      <ProtectedRoute>
+      <ProtectedRoute requiredRole="user">
         <Orders />
       </ProtectedRoute>
     ),
@@ -66,7 +66,7 @@ export const AppRoutes = [
   {
     path: "/admin/products",
     element: (
-      <ProtectedRoute>
+      <ProtectedRoute requiredRole="admin">
         <AdminDashboard />
       </ProtectedRoute>
     ),
@@ -74,7 +74,7 @@ export const AppRoutes = [
   {
     path: "/admin/orders",
     element: (
-      <ProtectedRoute>
+      <ProtectedRoute requiredRole="admin">
         <AdminOrders />
       </ProtectedRoute>
     ),

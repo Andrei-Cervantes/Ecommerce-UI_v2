@@ -4,13 +4,26 @@ import { Navigate } from "react-router-dom";
 
 interface ProtectedRouteProps {
   children: ReactNode;
+  requiredRole?: "admin" | "user";
 }
 
-const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
-  const user = useUserStore();
-  const isAuthenticated = !!user.user?.token; // Check if user is authenticated
+const ProtectedRoute = ({ children, requiredRole }: ProtectedRouteProps) => {
+  const { user } = useUserStore();
+  const isAuthenticated = !!user?.token;
+  const isAdmin = user?.isAdmin;
 
-  return isAuthenticated ? children : <Navigate to="/login" replace />;
+  // Not logged in — go to login
+  if (!isAuthenticated) return <Navigate to="/login" replace />;
+
+  // Admin trying to access user-only route
+  if (requiredRole === "user" && isAdmin)
+    return <Navigate to="/admin/products" replace />;
+
+  // User trying to access admin-only route
+  if (requiredRole === "admin" && !isAdmin)
+    return <Navigate to="/home" replace />;
+
+  return children;
 };
 
 export default ProtectedRoute;

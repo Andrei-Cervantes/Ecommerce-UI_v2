@@ -5,7 +5,6 @@ export interface IUser {
   email: string;
   isAdmin: boolean;
   token: string;
-  refreshToken?: string;
 }
 
 export interface IUserRegisterRequest {
@@ -18,4 +17,9 @@ export interface IUserRegisterRequest {
 export interface IUserLoginRequest {
   email: string;
   password: string;
+}
+
+export interface IUserLoginResponse {
+  accessToken: string;
+  user: Omit<IUser, "token">;
 }

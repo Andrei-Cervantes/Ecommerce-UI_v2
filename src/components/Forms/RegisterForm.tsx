@@ -1,5 +1,4 @@
 import z from "zod";
-import UserService from "@/api/user";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Input } from "@/components/ui/input";
@@ -7,6 +6,8 @@ import ErrorText from "../ErrorText";
 import { Button } from "../ui/button";
 import PasswordInput from "./PasswordInput";
 import { toast } from "sonner";
+import { useNavigate } from "react-router-dom";
+import { useRegisterUser } from "@/hooks/useRegisterUser";
 
 const registerSchema = z.object({
   email: z.string().email({ message: "Invalid email address" }),
@@ -23,14 +24,16 @@ const registerSchema = z.object({
 type RegisterFormData = z.infer<typeof registerSchema>;
 
 const RegisterForm = () => {
+  const navigate = useNavigate();
+  const { mutate: registerUser, isPending } = useRegisterUser();
+
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitting },
+    formState: { errors },
   } = useForm<RegisterFormData>({
     resolver: zodResolver(registerSchema),
   });
-  const { register: registerUser } = UserService();
 
   const onRegister = (data: RegisterFormData) => {
     if (data.password !== data.confirmPassword) {
@@ -40,12 +43,25 @@ const RegisterForm = () => {
       return;
     }
 
-    registerUser({
-      email: data.email,
-      password: data.password,
-      firstName: data.firstName,
-      lastName: data.lastName,
-    });
+    registerUser(
+      {
+        email: data.email,
+        password: data.password,
+        firstName: data.firstName,
+        lastName: data.lastName,
+      },
+      {
+        onSuccess: () => {
+          toast.success("Account created!", {
+            description: "You can now log in with your credentials.",
+          });
+          navigate("/login");
+        },
+        onError: (error) => {
+          console.log(error);
+        },
+      },
+    );
   };
 
   return (
@@ -87,8 +103,8 @@ const RegisterForm = () => {
         )}
       </div>
 
-      <Button type="submit" disabled={isSubmitting} className="w-full">
-        {isSubmitting ? "Logging in..." : "Login"}
+      <Button type="submit" disabled={isPending} className="w-full">
+        {isPending ? "Logging in..." : "Login"}
       </Button>
     </form>
   );

@@ -4,8 +4,11 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Input } from "@/components/ui/input";
 import ErrorText from "../ErrorText";
 import { Button } from "../ui/button";
-import UserService from "@/api/user";
 import PasswordInput from "./PasswordInput";
+import { useLoginUser } from "@/hooks/useLoginUser";
+import { useNavigate } from "react-router-dom";
+import { toast } from "sonner";
+import { useUserStore } from "@/zustand/stores/UserStore";
 
 const loginSchema = z.object({
   email: z.string().email({ message: "Invalid email address" }),
@@ -17,20 +20,47 @@ const loginSchema = z.object({
 type LoginFormData = z.infer<typeof loginSchema>;
 
 const LoginForm = () => {
+  const navigate = useNavigate();
+  const setUser = useUserStore((state) => state.setUser);
+  const { mutate: loginUser, isPending } = useLoginUser();
+
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitting },
+    formState: { errors },
   } = useForm<LoginFormData>({
     resolver: zodResolver(loginSchema),
   });
-  const { login } = UserService();
 
   const onLogin = (data: LoginFormData) => {
-    login({
-      email: data.email,
-      password: data.password,
-    });
+    loginUser(
+      {
+        email: data.email,
+        password: data.password,
+      },
+      {
+        onSuccess: (response) => {
+          const user = response.user;
+
+          setUser({
+            id: user.id,
+            email: user.email,
+            firstName: user.firstName,
+            lastName: user.lastName,
+            isAdmin: user.isAdmin,
+            token: response.accessToken,
+          });
+
+          toast.success("User logged in successfully!");
+
+          if (response.user.isAdmin) {
+            navigate("/admin/products");
+          } else {
+            navigate("/home");
+          }
+        },
+      },
+    );
   };
 
   return (
@@ -49,8 +79,8 @@ const LoginForm = () => {
         {errors.password && <ErrorText text={errors.password.message} />}
       </div>
 
-      <Button type="submit" disabled={isSubmitting} className="w-full">
-        {isSubmitting ? "Logging in..." : "Login"}
+      <Button type="submit" disabled={isPending} className="w-full">
+        {isPending ? "Logging in..." : "Login"}
       </Button>
     </form>
   );

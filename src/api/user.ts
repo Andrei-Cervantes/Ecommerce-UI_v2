@@ -1,5 +1,9 @@
 import { useAxios } from "@/hooks/useAxios";
-import type { IUserLoginRequest, IUserRegisterRequest } from "@/types/IUser";
+import type {
+  IUserLoginRequest,
+  IUserRegisterRequest,
+  IUserLoginResponse,
+} from "@/types/IUser";
 import { ENDPOINTS } from "./endpoints";
 import { toast } from "sonner";
 
@@ -24,7 +28,7 @@ const UserService = () => {
 
   const login = async (userData: IUserLoginRequest) => {
     try {
-      const response = await POST({
+      const response = await POST<IUserLoginResponse>({
         url: ENDPOINTS.USER.LOGIN,
         data: userData,
       });
