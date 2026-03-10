@@ -31,7 +31,9 @@ const Navbar = () => {
       ? adminNavItems
       : privateNavItems;
 
-  const filteredNavItems = navItems.filter((item) => item.href !== pathname);
+  const filteredNavItems = !isAuthenticated
+    ? navItems.filter((item) => item.href !== pathname)
+    : navItems;
 
   return (
     <nav className="h-10 border-b px-4">
