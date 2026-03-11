@@ -17,7 +17,7 @@ const SectionCard: React.FC<SectionCardProps> = ({
   logo,
 }) => {
   return (
-    <Card className={cn("w-full p-6", className)}>
+    <Card className={cn("w-full p-6 m-4", className)}>
       {(title || description) && (
         <div className="space-y-1 text-center">
           {title && <h2 className="text-2xl font-bold">{title}</h2>}
