@@ -64,7 +64,11 @@ const LoginForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit(onLogin)} className="space-y-4" noValidate>
+    <form
+      onSubmit={handleSubmit(onLogin)}
+      className="space-y-4 w-full"
+      noValidate
+    >
       <div>
         <Input
           autoFocus
@@ -79,7 +83,7 @@ const LoginForm = () => {
         {errors.password && <ErrorText text={errors.password.message} />}
       </div>
 
-      <Button type="submit" disabled={isPending} className="w-full">
+      <Button type="submit" disabled={isPending} className="w-full mt-8">
         {isPending ? "Logging in..." : "Login"}
       </Button>
     </form>

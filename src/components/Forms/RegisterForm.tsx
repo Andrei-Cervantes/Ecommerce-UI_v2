@@ -65,7 +65,11 @@ const RegisterForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit(onRegister)} noValidate className="space-y-4">
+    <form
+      onSubmit={handleSubmit(onRegister)}
+      noValidate
+      className="space-y-4 w-full"
+    >
       <div className="grid grid-cols-2 gap-4">
         <div>
           <Input
@@ -103,7 +107,7 @@ const RegisterForm = () => {
         )}
       </div>
 
-      <Button type="submit" disabled={isPending} className="w-full">
+      <Button type="submit" disabled={isPending} className="w-full mt-8">
         {isPending ? "Logging in..." : "Login"}
       </Button>
     </form>

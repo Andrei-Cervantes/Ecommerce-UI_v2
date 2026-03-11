@@ -36,7 +36,7 @@ const Navbar = () => {
     : navItems;
 
   return (
-    <nav className="h-10 border-b px-4">
+    <nav className="h-10 border-b px-4 bg-white">
       <div className="max-w-6xl mx-auto h-full flex justify-between items-center">
         <NavLink to="/">B&W Shop</NavLink>
         <div className="flex gap-4">
