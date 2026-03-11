@@ -55,7 +55,7 @@ const Navbar = () => {
 
   return (
     <nav className={cn("h-14 border-b px-4 bg-black", style.navBg)}>
-      <div className="max-w-6xl mx-auto h-full flex justify-between items-center">
+      <div className="max-w-7xl mx-auto h-full flex justify-between items-center">
         <NavLink className={style.logoText} to="/">
           B&W Shop
         </NavLink>
