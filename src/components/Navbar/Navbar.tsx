@@ -41,7 +41,6 @@ const Navbar = () => {
   const isAdmin = user?.isAdmin;
 
   const style = !isAuthenticated ? userStyle : isAdmin ? adminStyle : userStyle;
-  console.log(style);
 
   const navItems = !isAuthenticated
     ? publicNavItems
