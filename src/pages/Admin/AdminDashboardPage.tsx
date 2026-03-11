@@ -1,8 +1,10 @@
 const AdminDashboardPage = () => {
   return (
-    <div>
-      <h1>AdminDashboard</h1>
-    </div>
+    <main className="flex-1">
+      {/* Top */}
+      <section></section>
+      {/* Bottom */}
+    </main>
   );
 };
 
