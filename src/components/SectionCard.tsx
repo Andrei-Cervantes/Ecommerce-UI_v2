@@ -18,6 +18,7 @@ const SectionCard: React.FC<SectionCardProps> = ({
 }) => {
   return (
     <Card className={cn("w-full p-6 m-4", className)}>
+      {logo && logo}
       {(title || description) && (
         <div className="space-y-1 text-center">
           {title && <h2 className="text-2xl font-bold">{title}</h2>}
@@ -26,7 +27,6 @@ const SectionCard: React.FC<SectionCardProps> = ({
           )}
         </div>
       )}
-      {logo && logo}
       {children}
     </Card>
   );
