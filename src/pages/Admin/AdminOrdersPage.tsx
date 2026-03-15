@@ -1,3 +1,12 @@
+import AdminStatCard from "@/components/AdminStatCard";
+
+const stats = [
+  { title: "TOTAL ORDERS", stats: "8", description: "All time" },
+  { title: "PENDING", stats: "6", description: "Awaiting fulfillment" },
+  { title: "COMPLETED", stats: "2", description: "Fulfilled" },
+  { title: "TOTAL REVENUE", stats: "$65", description: "All orders" },
+];
+
 const AdminOrdersPage = () => {
   return (
     <main className="flex-1">
@@ -7,14 +16,23 @@ const AdminOrdersPage = () => {
           <div className="flex justify-between items-end">
             <div>
               <p className="text-xs text-muted-foreground tracking-widest">
-                CATALOGUE
+                COMMERCE
               </p>
-              <h2 className="font-playfair font-black text-3xl">Products</h2>
+              <h2 className="font-playfair font-black text-3xl">Orders</h2>
             </div>
             {/* <Button>New Product</Button> */}
           </div>
           <div className="grid grid-cols-[repeat(auto-fit,minmax(250px,1fr))] gap-4">
-            asd
+            {stats.map((stat) => (
+              <AdminStatCard
+                title={stat.title}
+                stat={stat.stats}
+                description={stat.description}
+                descriptionClassName={
+                  stat.title === "COMPLETED" ? "text-green-500" : undefined
+                }
+              />
+            ))}
           </div>
         </section>
         {/* Bottom */}
