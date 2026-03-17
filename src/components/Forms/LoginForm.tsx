@@ -49,7 +49,6 @@ const LoginForm = () => {
         onSuccess: (response) => {
           const user = response.user;
 
-          // ✅ SAFE: use submitted data
           if (rememberMe) {
             localStorage.setItem("rememberMe", "true");
             localStorage.setItem(
@@ -105,25 +104,11 @@ const LoginForm = () => {
       localStorage.removeItem("rememberMe");
       localStorage.removeItem("savedCredentials");
     } else {
-      const email = getValues("email"); // get current email value
+      const email = getValues("email");
       localStorage.setItem("rememberMe", "true");
       localStorage.setItem("savedCredentials", JSON.stringify({ email }));
     }
   };
-  // useEffect(() => {
-  //   if (!rememberMe) return;
-
-  //   const subscription = watch((value) => {
-  //     localStorage.setItem(
-  //       "savedCredentials",
-  //       JSON.stringify({
-  //         email: value.email,
-  //       }),
-  //     );
-  //   });
-
-  //   return () => subscription.unsubscribe();
-  // }, [rememberMe, watch]);
 
   return (
     <form
