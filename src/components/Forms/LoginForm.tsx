@@ -9,6 +9,8 @@ import { useLoginUser } from "@/hooks/useLoginUser";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import { useUserStore } from "@/zustand/stores/UserStore";
+import { Checkbox } from "../ui/checkbox";
+import { useEffect, useState } from "react";
 
 const loginSchema = z.object({
   email: z.string().email({ message: "Invalid email address" }),
@@ -20,11 +22,16 @@ const loginSchema = z.object({
 type LoginFormData = z.infer<typeof loginSchema>;
 
 const LoginForm = () => {
+  const [rememberMe, setRememberMe] = useState(() => {
+    return localStorage.getItem("rememberMe") === "true";
+  });
   const navigate = useNavigate();
   const setUser = useUserStore((state) => state.setUser);
   const { mutate: loginUser, isPending } = useLoginUser();
 
   const {
+    watch,
+    setValue,
     register,
     handleSubmit,
     formState: { errors },
@@ -42,6 +49,21 @@ const LoginForm = () => {
         onSuccess: (response) => {
           const user = response.user;
 
+          // ✅ SAFE: use submitted data
+          if (rememberMe) {
+            localStorage.setItem("rememberMe", "true");
+            localStorage.setItem(
+              "savedCredentials",
+              JSON.stringify({
+                email: data.email,
+                password: data.password,
+              }),
+            );
+          } else {
+            localStorage.removeItem("rememberMe");
+            localStorage.removeItem("savedCredentials");
+          }
+
           setUser({
             id: user.id,
             email: user.email,
@@ -53,15 +75,56 @@ const LoginForm = () => {
 
           toast.success("User logged in successfully!");
 
-          if (response.user.isAdmin) {
-            navigate("/admin/products");
-          } else {
-            navigate("/home");
-          }
+          navigate(user.isAdmin ? "/admin/products" : "/home");
         },
       },
     );
   };
+
+  useEffect(() => {
+    const savedCredentials = localStorage.getItem("savedCredentials");
+
+    if (savedCredentials) {
+      try {
+        const credentials = JSON.parse(savedCredentials);
+
+        setValue("email", credentials.email);
+        setValue("password", credentials.password);
+      } catch (error) {
+        console.error("Error parsing saved credentials:", error);
+        localStorage.removeItem("savedCredentials");
+      }
+    }
+  }, [setValue]);
+
+  const handleRememberMeChange = (checked: boolean | "indeterminate") => {
+    const isChecked = checked === true;
+    setRememberMe(isChecked);
+
+    if (!isChecked) {
+      // 🚨 Immediately remove saved credentials
+      localStorage.removeItem("rememberMe");
+      localStorage.removeItem("savedCredentials");
+    } else {
+      // Optional: persist flag immediately
+      localStorage.setItem("rememberMe", "true");
+    }
+  };
+
+  useEffect(() => {
+    if (rememberMe) {
+      const subscription = watch((value) => {
+        localStorage.setItem(
+          "savedCredentials",
+          JSON.stringify({
+            email: value.email,
+          }),
+        );
+      });
+
+      return () => subscription.unsubscribe();
+    }
+  }, [rememberMe, watch]);
 
   return (
     <form
@@ -78,9 +141,17 @@ const LoginForm = () => {
         />
         {errors.email && <ErrorText text={errors.email.message} />}
       </div>
-      <div>
+      <div className="space-y-2">
         <PasswordInput placeholder="Password" {...register("password")} />
         {errors.password && <ErrorText text={errors.password.message} />}
+        <div className="flex gap-2 items-center px-2">
+          <Checkbox
+            id="rememberMe"
+            checked={rememberMe}
+            onCheckedChange={handleRememberMeChange}
+          />
+          <label htmlFor="rememberMe">Remember me</label>
+        </div>
       </div>
 
       <Button type="submit" disabled={isPending} className="w-full mt-8">
