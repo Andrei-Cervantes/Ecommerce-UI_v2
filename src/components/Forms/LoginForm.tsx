@@ -30,7 +30,7 @@ const LoginForm = () => {
   const { mutate: loginUser, isPending } = useLoginUser();
 
   const {
-    watch,
+    getValues,
     setValue,
     register,
     handleSubmit,
@@ -102,29 +102,28 @@ const LoginForm = () => {
     setRememberMe(isChecked);
 
     if (!isChecked) {
-      // 🚨 Immediately remove saved credentials
       localStorage.removeItem("rememberMe");
       localStorage.removeItem("savedCredentials");
     } else {
-      // Optional: persist flag immediately
+      const email = getValues("email"); // get current email value
       localStorage.setItem("rememberMe", "true");
+      localStorage.setItem("savedCredentials", JSON.stringify({ email }));
     }
   };
+  // useEffect(() => {
+  //   if (!rememberMe) return;
 
-  useEffect(() => {
-    if (rememberMe) {
-      const subscription = watch((value) => {
-        localStorage.setItem(
-          "savedCredentials",
-          JSON.stringify({
-            email: value.email,
-          }),
-        );
-      });
+  //   const subscription = watch((value) => {
+  //     localStorage.setItem(
+  //       "savedCredentials",
+  //       JSON.stringify({
+  //         email: value.email,
+  //       }),
+  //     );
+  //   });
 
-      return () => subscription.unsubscribe();
-    }
-  }, [rememberMe, watch]);
+  //   return () => subscription.unsubscribe();
+  // }, [rememberMe, watch]);
 
   return (
     <form
