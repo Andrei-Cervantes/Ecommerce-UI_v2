@@ -27,7 +27,6 @@ export const useAxios = () => {
     (error) => {
       if (error.response?.status === 401) {
         useUserStore.getState().clearUser();
-        // window.location.href = "/login";
       }
       return Promise.reject(error);
     },
