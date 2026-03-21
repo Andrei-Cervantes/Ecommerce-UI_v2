@@ -32,6 +32,7 @@ const AdminDashboardPage = () => {
                 descriptionClassName={
                   stat.title === "ACTIVE" ? "text-green-500" : undefined
                 }
+                key={stat.title}
               />
             ))}
           </div>
