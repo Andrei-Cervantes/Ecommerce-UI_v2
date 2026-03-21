@@ -14,11 +14,6 @@ const privateNavItems = [
   { label: "Orders", href: "/orders" },
 ];
 
-const adminNavItems = [
-  { label: "Products", href: "/admin/products" },
-  { label: "Orders", href: "/admin/orders" },
-];
-
 const userStyle = {
   navBg: "bg-white",
   textActive: "text-foreground",
@@ -26,36 +21,22 @@ const userStyle = {
   logoText: "text-black",
 };
 
-const adminStyle = {
-  navBg: "bg-black",
-  textActive: "text-white",
-  textInactive: "text-muted-foreground hover:text-white",
-  logoText: "text-white",
-};
-
 const Navbar = () => {
   const { user } = useUserStore();
   const { pathname } = useLocation();
 
   const isAuthenticated = !!user?.token;
-  const isAdmin = user?.isAdmin;
 
-  const style = !isAuthenticated ? userStyle : isAdmin ? adminStyle : userStyle;
-
-  const navItems = !isAuthenticated
-    ? publicNavItems
-    : isAdmin
-      ? adminNavItems
-      : privateNavItems;
+  const navItems = isAuthenticated ? privateNavItems : publicNavItems;
 
   const filteredNavItems = !isAuthenticated
     ? navItems.filter((item) => item.href !== pathname)
     : navItems;
 
   return (
-    <nav className={cn("h-14 border-b px-4 bg-black", style.navBg)}>
+    <nav className={cn("h-14 border-b px-4 bg-black", userStyle.navBg)}>
       <div className="max-w-7xl mx-auto h-full flex justify-between items-center">
-        <NavLink className={style.logoText} to="/">
+        <NavLink className={userStyle.logoText} to="/">
           B&W Shop
         </NavLink>
         <div className="flex gap-4">
@@ -66,7 +47,7 @@ const Navbar = () => {
               className={({ isActive }) =>
                 cn(
                   "text-sm font-medium transition-colors",
-                  isActive ? style.textActive : style.textInactive,
+                  isActive ? userStyle.textActive : userStyle.textInactive,
                 )
               }
             >

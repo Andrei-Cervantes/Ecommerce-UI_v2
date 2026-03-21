@@ -2,6 +2,7 @@ import { useUserStore } from "@/zustand/stores/UserStore";
 import Navbar from "../Navbar/Navbar";
 import bg from "@/assets/bg.png";
 import { cn } from "@/lib/utils";
+import AdminNavbar from "../Navbar/AdminNavbar";
 
 const MainLayout = ({ children }: { children: React.ReactNode }) => {
   const { user } = useUserStore();
@@ -22,7 +23,7 @@ const MainLayout = ({ children }: { children: React.ReactNode }) => {
           <div className="fixed inset-0 -z-10 bg-black/20 backdrop-blur-[1px]" />
         </>
       )}
-      <Navbar />
+      {isAdmin ? <AdminNavbar /> : <Navbar />}
       {children}
     </div>
   );
