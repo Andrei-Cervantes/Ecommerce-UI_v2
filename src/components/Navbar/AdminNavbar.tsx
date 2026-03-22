@@ -1,7 +1,9 @@
 import { Box, Handbag } from "lucide-react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import AdminNavButton from "./AdminNavButton";
 import { Separator } from "../ui/separator";
+import { Button } from "../ui/button";
+import { useUserStore } from "@/zustand/stores/UserStore";
 
 export interface AdminNavItem {
   label: string;
@@ -15,6 +17,14 @@ const adminNavItems: AdminNavItem[] = [
 ];
 
 const AdminNavbar = () => {
+  const { clearUser } = useUserStore();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    clearUser();
+    navigate("/login");
+  };
+
   return (
     <nav className="h-14 border-b px-4 bg-black">
       <div className="max-w-7xl mx-auto h-full flex justify-between items-center">
@@ -37,6 +47,7 @@ const AdminNavbar = () => {
             ))}
           </div>
         </div>
+        <Button onClick={handleLogout}>Logout</Button>
       </div>
     </nav>
   );
