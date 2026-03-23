@@ -4,6 +4,8 @@ import AdminNavButton from "./AdminNavButton";
 import { Separator } from "../ui/separator";
 import { Button } from "../ui/button";
 import { useUserStore } from "@/zustand/stores/UserStore";
+import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
+import { Avatar, AvatarFallback } from "../ui/avatar";
 
 export interface AdminNavItem {
   label: string;
@@ -17,8 +19,10 @@ const adminNavItems: AdminNavItem[] = [
 ];
 
 const AdminNavbar = () => {
-  const { clearUser } = useUserStore();
+  const { user, clearUser } = useUserStore();
   const navigate = useNavigate();
+
+  const userInitial = user?.firstName[0];
 
   const handleLogout = () => {
     clearUser();
@@ -47,7 +51,32 @@ const AdminNavbar = () => {
             ))}
           </div>
         </div>
-        <Button onClick={handleLogout}>Logout</Button>
+        <div className="flex gap-4 items-center">
+          <div className="px-3 py-1 border border-[#2E2E2E] bg-[#1A1A1A] rounded-2xl flex items-center gap-2">
+            <div className="h-2.5 w-2.5 rounded-2xl bg-green-500/50 flex items-center justify-center">
+              <div className="h-1.5 w-1.5 rounded-2xl bg-[#27AE60]" />
+            </div>
+            <p className="text-[#8A8A88] text-xs">LIVE STORE</p>
+          </div>
+          <Popover>
+            <PopoverTrigger asChild>
+              <div className="flex gap-2 items-center">
+                <Avatar>
+                  {/* Add avatar image if available */}
+                  <AvatarFallback className="text-black">
+                    {userInitial || "A"}
+                  </AvatarFallback>
+                </Avatar>
+                <p className="text-xs text-[#8A8A88]">ADMIN</p>
+              </div>
+            </PopoverTrigger>
+            <PopoverContent className="w-fit p-1">
+              <div>
+                <Button onClick={handleLogout}>Logout</Button>
+              </div>
+            </PopoverContent>
+          </Popover>
+        </div>
       </div>
     </nav>
   );
