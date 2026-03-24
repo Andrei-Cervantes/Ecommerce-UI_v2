@@ -62,7 +62,6 @@ const AdminNavbar = () => {
             <PopoverTrigger asChild>
               <div className="flex gap-2 items-center">
                 <Avatar>
-                  {/* Add avatar image if available */}
                   <AvatarFallback className="text-black">
                     {userInitial || "A"}
                   </AvatarFallback>
