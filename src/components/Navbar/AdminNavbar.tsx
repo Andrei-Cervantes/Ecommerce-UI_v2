@@ -36,7 +36,7 @@ const AdminNavbar = () => {
           <div className="flex gap-2 items-end">
             <NavLink
               className="text-white font-bebas-nue text-3xl leading-6"
-              to="/"
+              to="/admin/products"
             >
               B&W
             </NavLink>

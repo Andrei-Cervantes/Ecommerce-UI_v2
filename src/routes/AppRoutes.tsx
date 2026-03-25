@@ -12,16 +12,32 @@ import Login from "@/pages/Public/LoginPage";
 import Register from "@/pages/Public/RegisterPage";
 
 import ProtectedRoute from "./ProtectedRoute";
+import PublicOnlyRoute from "./PublicOnlyRoute";
 
 export const AppRoutes = [
-  { path: "/", element: <PublicHomePage /> },
+  {
+    path: "/",
+    element: (
+      <PublicOnlyRoute>
+        <PublicHomePage />
+      </PublicOnlyRoute>
+    ),
+  },
   {
     path: "/login",
-    element: <Login />,
+    element: (
+      <PublicOnlyRoute>
+        <Login />
+      </PublicOnlyRoute>
+    ),
   },
   {
     path: "/register",
-    element: <Register />,
+    element: (
+      <PublicOnlyRoute>
+        <Register />
+      </PublicOnlyRoute>
+    ),
   },
   {
     path: "/home",
