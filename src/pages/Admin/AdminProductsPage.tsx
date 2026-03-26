@@ -8,7 +8,7 @@ const stats = [
   { title: "AVG. PRICE", stats: "$65", description: "Across active items" },
 ];
 
-const AdminDashboardPage = () => {
+const AdminProductsPage = () => {
   return (
     <main className="flex-1">
       <div className="max-w-7xl mx-auto">
@@ -53,4 +53,4 @@ const AdminDashboardPage = () => {
   );
 };
 
-export default AdminDashboardPage;
+export default AdminProductsPage;

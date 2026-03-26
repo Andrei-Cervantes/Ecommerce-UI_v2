@@ -1,4 +1,4 @@
-import AdminDashboard from "@/pages/Admin/AdminDashboardPage";
+import AdminProductsPage from "@/pages/Admin/AdminProductsPage";
 import AdminOrders from "@/pages/Admin/AdminOrdersPage";
 
 import PrivateHomePage from "@/pages/Private/HomePage";
@@ -83,7 +83,7 @@ export const AppRoutes = [
     path: "/admin/products",
     element: (
       <ProtectedRoute requiredRole="admin">
-        <AdminDashboard />
+        <AdminProductsPage />
       </ProtectedRoute>
     ),
   },
