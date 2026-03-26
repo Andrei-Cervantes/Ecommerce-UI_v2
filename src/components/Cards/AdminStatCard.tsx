@@ -1,5 +1,5 @@
 import { cn } from "@/lib/utils";
-import { Card } from "./ui/card";
+import AdminCard from "./AdminCard";
 
 interface AdminStatCardProps {
   title: string;
@@ -17,7 +17,7 @@ const AdminStatCard = ({
   descriptionClassName,
 }: AdminStatCardProps) => {
   return (
-    <Card className={cn("border-2 border-black p-6", className)}>
+    <AdminCard className={cn("p-6", className)}>
       <h3 className="text-muted-foreground tracking-widest text-xs">{title}</h3>
       <p className="tracking-wider text-5xl font-bebas-nue">{stat}</p>
       <p
@@ -28,7 +28,7 @@ const AdminStatCard = ({
       >
         {description}
       </p>
-    </Card>
+    </AdminCard>
   );
 };
 

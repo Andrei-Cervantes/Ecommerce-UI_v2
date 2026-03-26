@@ -1,4 +1,5 @@
-import AdminStatCard from "@/components/AdminStatCard";
+import AdminCard from "@/components/Cards/AdminCard";
+import AdminStatCard from "@/components/Cards/AdminStatCard";
 import { Button } from "@/components/ui/button";
 
 const stats = [
@@ -47,6 +48,7 @@ const AdminProductsPage = () => {
               - {stats[0].stats} ITEMS
             </p>
           </div>
+          <AdminCard className="px-5 py-4">Content</AdminCard>
         </section>
       </div>
     </main>

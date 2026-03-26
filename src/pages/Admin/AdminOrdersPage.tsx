@@ -1,4 +1,4 @@
-import AdminStatCard from "@/components/AdminStatCard";
+import AdminStatCard from "@/components/Cards/AdminStatCard";
 
 const stats = [
   { title: "TOTAL ORDERS", stats: "8", description: "All time" },
