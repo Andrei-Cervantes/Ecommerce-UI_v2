@@ -25,6 +25,7 @@ const MainLayout = ({ children }: { children: React.ReactNode }) => {
       )}
       {isAdmin ? <AdminNavbar /> : <Navbar />}
       {children}
+      {/* TODO: add footer */}
     </div>
   );
 };
