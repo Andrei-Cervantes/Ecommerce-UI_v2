@@ -48,6 +48,7 @@ const AdminProductsPage = () => {
               - {stats[0].stats} ITEMS
             </p>
           </div>
+          {/* TODO: Add table using tanstack table for products */}
           <AdminCard className="px-5 py-4">Content</AdminCard>
         </section>
       </div>
