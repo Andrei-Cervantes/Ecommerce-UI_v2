@@ -1,6 +1,8 @@
 import AdminCard from "@/components/Cards/AdminCard";
 import AdminStatCard from "@/components/Cards/AdminStatCard";
+import NewProductModal from "@/components/Modals/NewProductModal";
 import { Button } from "@/components/ui/button";
+import { useState } from "react";
 
 const stats = [
   { title: "TOTAL PRODUCTS", stats: "8", description: "All catalogue items" },
@@ -10,6 +12,8 @@ const stats = [
 ];
 
 const AdminProductsPage = () => {
+  const [isNewProductModalOpen, setIsNewProductModalOpen] = useState(false);
+
   return (
     <main className="flex-1">
       <div className="max-w-7xl mx-auto">
@@ -22,7 +26,9 @@ const AdminProductsPage = () => {
               </p>
               <h2 className="font-playfair font-black text-3xl">Products</h2>
             </div>
-            <Button>New Product</Button>
+            <Button onClick={() => setIsNewProductModalOpen(true)}>
+              New Product
+            </Button>
           </div>
           <div className="grid grid-cols-[repeat(auto-fit,minmax(250px,1fr))] gap-4">
             {stats.map((stat) => (
@@ -52,6 +58,10 @@ const AdminProductsPage = () => {
           <AdminCard className="px-5 py-4">Content</AdminCard>
         </section>
       </div>
+      <NewProductModal
+        isOpen={isNewProductModalOpen}
+        onClose={() => setIsNewProductModalOpen(false)}
+      />
     </main>
   );
 };
