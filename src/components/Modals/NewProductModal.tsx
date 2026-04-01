@@ -1,4 +1,4 @@
-import { Dialog } from "../ui/dialog";
+import { Dialog, DialogContent } from "../ui/dialog";
 
 interface NewProductModalProps {
   isOpen: boolean;
@@ -18,7 +18,8 @@ const NewProductModal: React.FC<NewProductModalProps> = ({
         if (!open) onClose();
       }}
     >
-      asd
+      {/* TODO: Add modal content */}
+      <DialogContent className="w-full max-w-lg">asd</DialogContent>
     </Dialog>
   );
 };
