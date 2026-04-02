@@ -18,7 +18,7 @@ const NewProductModal: React.FC<NewProductModalProps> = ({
         if (!open) onClose();
       }}
     >
-      {/* TODO: Add modal content */}
+      {/* TODO: Add modal content and form */}
       <DialogContent className="w-full max-w-lg">asd</DialogContent>
     </Dialog>
   );
