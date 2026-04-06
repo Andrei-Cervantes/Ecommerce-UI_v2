@@ -1,4 +1,5 @@
-import { Dialog, DialogContent } from "../ui/dialog";
+import NewProductForm from "../Forms/NewProductForm";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "../ui/dialog";
 
 interface NewProductModalProps {
   isOpen: boolean;
@@ -19,7 +20,14 @@ const NewProductModal: React.FC<NewProductModalProps> = ({
       }}
     >
       {/* TODO: Add modal content and form */}
-      <DialogContent className="w-full max-w-lg">asd</DialogContent>
+      <DialogContent className="w-full max-w-lg">
+        <DialogHeader>
+          <DialogTitle className="text-2xl font-bold">
+            Add New Product
+          </DialogTitle>
+        </DialogHeader>
+        <NewProductForm />
+      </DialogContent>
     </Dialog>
   );
 };
