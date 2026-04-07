@@ -1,5 +1,5 @@
-import AdminCard from "@/components/Cards/AdminCard";
 import AdminStatCard from "@/components/Cards/AdminStatCard";
+import ProductContent from "@/components/Tables/ProductContent";
 import NewProductModal from "@/components/Modals/NewProductModal";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
@@ -55,7 +55,7 @@ const AdminProductsPage = () => {
             </p>
           </div>
           {/* TODO: Add table using tanstack table for products */}
-          <AdminCard className="px-5 py-4">Content</AdminCard>
+          <ProductContent />
         </section>
       </div>
       <NewProductModal
