@@ -5,6 +5,8 @@ import { Input } from "../ui/input";
 import { Textarea } from "../ui/textarea";
 import { Button } from "../ui/button";
 import ErrorText from "../ErrorText";
+import ProductService from "@/api/products";
+import { useMutation } from "@tanstack/react-query";
 
 const newProductSchema = z.object({
   name: z.string().min(1, { message: "Product name is required" }),
@@ -14,7 +16,11 @@ const newProductSchema = z.object({
 
 type NewProductFormData = z.infer<typeof newProductSchema>;
 
-const NewProductForm = () => {
+interface NewProductFormProps {
+  onClose: () => void;
+}
+
+const NewProductForm = ({ onClose }: NewProductFormProps) => {
   const {
     register,
     handleSubmit,
@@ -23,8 +29,16 @@ const NewProductForm = () => {
     resolver: zodResolver(newProductSchema),
   });
 
+  const { createProduct } = ProductService();
+  const { mutate: createProductMutate } = useMutation({
+    mutationFn: createProduct,
+    onSuccess: () => {
+      onClose();
+    },
+  });
+
   const onSubmit = (data: NewProductFormData) => {
-    console.log("New Product Data:", data);
+    createProductMutate(data);
   };
 
   return (

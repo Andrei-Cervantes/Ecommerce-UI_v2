@@ -10,8 +10,6 @@ const NewProductModal: React.FC<NewProductModalProps> = ({
   isOpen,
   onClose,
 }) => {
-  if (!isOpen) return null;
-
   return (
     <Dialog
       open={isOpen}
@@ -19,14 +17,13 @@ const NewProductModal: React.FC<NewProductModalProps> = ({
         if (!open) onClose();
       }}
     >
-      {/* TODO: Add modal content and form */}
       <DialogContent className="w-full max-w-lg">
         <DialogHeader>
           <DialogTitle className="text-2xl font-bold">
             Add New Product
           </DialogTitle>
         </DialogHeader>
-        <NewProductForm />
+        <NewProductForm onClose={onClose} />
       </DialogContent>
     </Dialog>
   );
