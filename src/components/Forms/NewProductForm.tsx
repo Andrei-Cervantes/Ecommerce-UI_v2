@@ -30,7 +30,7 @@ const NewProductForm = ({ onClose }: NewProductFormProps) => {
   });
 
   const { createProduct } = ProductService();
-  const { mutate: createProductMutate } = useMutation({
+  const { mutate: createProductMutate, isPending } = useMutation({
     mutationFn: createProduct,
     onSuccess: () => {
       onClose();
@@ -62,7 +62,9 @@ const NewProductForm = ({ onClose }: NewProductFormProps) => {
         />
         {errors.price && <ErrorText text={errors.price.message} />}
       </div>
-      <Button type="submit">Add Product</Button>
+      <Button type="submit" disabled={isPending}>
+        {isPending ? "Adding Product..." : "Add Product"}
+      </Button>
     </form>
   );
 };
