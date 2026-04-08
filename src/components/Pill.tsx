@@ -3,8 +3,8 @@ interface PillProps {
 }
 
 const Pill: React.FC<PillProps> = ({ status }) => {
-  const bgColor = status === "active" ? "bg-green-100" : "bg-zinc-500";
-  const textColor = status === "active" ? "text-green-800" : "text-zinc-500";
+  const bgColor = status === "active" ? "bg-green-100" : "bg-zinc-100";
+  const textColor = status === "active" ? "text-green-800" : "text-zinc-600";
   const text = status === "active" ? "Active" : "Inactive";
 
   return (

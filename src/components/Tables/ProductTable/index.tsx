@@ -10,7 +10,7 @@ const ProductTable = ({ table }: ProductTableProps) => {
   return (
     <>
       <table className="w-full text-sm">
-        <thead>
+        <thead className="bg-black text-white">
           {table.getHeaderGroups().map((headerGroup) => (
             <tr key={headerGroup.id} className="border-b">
               {headerGroup.headers.map((header) => (
@@ -37,7 +37,7 @@ const ProductTable = ({ table }: ProductTableProps) => {
         </tbody>
       </table>
 
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between px-5 py-4">
         <p className="text-sm text-muted-foreground">
           Page {table.getState().pagination.pageIndex + 1} of{" "}
           {table.getPageCount()}

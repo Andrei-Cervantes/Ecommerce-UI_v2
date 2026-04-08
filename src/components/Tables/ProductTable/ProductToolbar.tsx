@@ -24,7 +24,7 @@ const ProductToolbar = ({
   onGlobalFilterChange,
 }: ProductToolbarProps) => {
   return (
-    <div className="flex justify-between">
+    <div className="flex justify-between px-5 py-4">
       <div className="flex gap-2">
         <Input
           placeholder="Search products..."

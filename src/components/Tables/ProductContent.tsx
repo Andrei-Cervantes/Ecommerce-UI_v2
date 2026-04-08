@@ -44,7 +44,7 @@ const ProductContent = () => {
   });
 
   return (
-    <AdminCard className="px-5 py-4 bg-[#E8E8E3]">
+    <AdminCard className="bg-[#E8E8E3] py-0">
       <div>
         <ProductToolbar
           table={table}
