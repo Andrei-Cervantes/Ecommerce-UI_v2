@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 import type { IProduct } from "@/types/IProduct";
 import { type Table, flexRender } from "@tanstack/react-table";
 
@@ -14,7 +15,13 @@ const ProductTable = ({ table }: ProductTableProps) => {
           {table.getHeaderGroups().map((headerGroup) => (
             <tr key={headerGroup.id} className="border-b">
               {headerGroup.headers.map((header) => (
-                <th key={header.id} className="py-2 text-left font-semibold">
+                <th
+                  key={header.id}
+                  className={cn(
+                    "py-2 px-4 font-medium text-[8px] tracking-[3px] uppercase",
+                    header.column.columnDef.meta?.thClass ?? "text-left",
+                  )}
+                >
                   {flexRender(
                     header.column.columnDef.header,
                     header.getContext(),
@@ -28,7 +35,13 @@ const ProductTable = ({ table }: ProductTableProps) => {
           {table.getRowModel().rows.map((row) => (
             <tr key={row.id} className="border-b hover:bg-muted/50">
               {row.getVisibleCells().map((cell) => (
-                <td key={cell.id} className="py-2">
+                <td
+                  key={cell.id}
+                  className={cn(
+                    "py-2 px-4",
+                    cell.column.columnDef.meta?.tdClass ?? "text-left",
+                  )}
+                >
                   {flexRender(cell.column.columnDef.cell, cell.getContext())}
                 </td>
               ))}

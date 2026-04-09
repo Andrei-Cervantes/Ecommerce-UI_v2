@@ -14,6 +14,10 @@ export const productColumns: ColumnDef<IProduct>[] = [
   {
     accessorKey: "price",
     header: "Price",
+    meta: {
+      thClass: "text-center",
+      tdClass: "text-center",
+    },
     cell: ({ row }) => {
       const price = row.original.price;
       return `Php ${price.toFixed(2)}`;
@@ -22,6 +26,10 @@ export const productColumns: ColumnDef<IProduct>[] = [
   {
     accessorKey: "isActive",
     header: "Status",
+    meta: {
+      thClass: "text-center",
+      tdClass: "text-center",
+    },
     cell: ({ row }) => {
       const isActive = row.original.isActive;
       return <Pill status={isActive ? "active" : "inactive"} />;
@@ -30,6 +38,10 @@ export const productColumns: ColumnDef<IProduct>[] = [
   {
     accessorKey: "actions",
     header: "Actions",
+    meta: {
+      thClass: "text-center",
+      tdClass: "text-center",
+    },
     cell: () => {
       return (
         <div className="flex gap-2">
