@@ -60,7 +60,7 @@ const AdminNavbar = () => {
           </div>
           <Popover>
             <PopoverTrigger asChild>
-              <div className="flex gap-2 items-center">
+              <div className="flex gap-2 items-center cursor-pointer">
                 <Avatar>
                   <AvatarFallback className="text-black">
                     {userInitial || "A"}
