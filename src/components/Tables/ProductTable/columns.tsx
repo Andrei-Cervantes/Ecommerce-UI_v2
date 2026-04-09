@@ -1,6 +1,7 @@
 import type { IProduct } from "@/types/IProduct";
 import { type ColumnDef } from "@tanstack/react-table";
 import Pill from "../../Pill";
+import { Button } from "@/components/ui/button";
 
 export const productColumns: ColumnDef<IProduct>[] = [
   {
@@ -42,15 +43,28 @@ export const productColumns: ColumnDef<IProduct>[] = [
       thClass: "text-center",
       tdClass: "text-center",
     },
-    cell: () => {
+    cell: ({ row }) => {
+      const isActive = row.original.isActive;
       return (
         <div className="flex gap-2">
-          <button className="px-2 py-1 bg-blue-500 text-white rounded">
+          <Button variant="outline" className="border-2 border-[#2E2E2E]">
             Edit
-          </button>
-          <button className="px-2 py-1 bg-red-500 text-white rounded">
-            Delete
-          </button>
+          </Button>
+          {isActive ? (
+            <Button
+              variant="outline"
+              className="border-2 border-[#C0392B] text-[#C0392B]"
+            >
+              Archive
+            </Button>
+          ) : (
+            <Button
+              variant="outline"
+              className="border-2 border-[#27AE60] text-[#27AE60]"
+            >
+              Activate
+            </Button>
+          )}
         </div>
       );
     },
